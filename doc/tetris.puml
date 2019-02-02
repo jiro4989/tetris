@@ -9,20 +9,20 @@ start
     endnote
     :引数を受け取る;
     if (左に移動可能である) then (true)
-        :テトリミノを左に1マス移動する;
+        :テトロミノを左に1マス移動する;
     endif
 end
 
 start
     note right
         deleteTetrominos
-        テトリミノが1行満たされることで、
+        テトロミノが1行満たされることで、
         削除可能かを判定する。
     endnote
     repeat
-        if (recordがすべてテトリミノである) then (true)
-            :recordのテトリミノを空にする;
-            :すべてのテトリミノを下にずらす;
+        if (recordがすべてテトロミノである) then (true)
+            :recordのテトロミノを空にする;
+            :すべてのテトロミノを下にずらす;
         endif
     repeat while (record : records)
 end
@@ -30,17 +30,40 @@ end
 start
     note right
         rotateTetorimino
-        テトリミノを回転する。
-        テトリミノは配列で保持していて、回転する場合は
+        テトロミノを回転する。
+        テトロミノは配列で保持していて、回転する場合は
         その配列インデクスを+1または-1することで実現する。
     endnote
-    :テトリミノのインデクスを取得する;
+    :テトロミノのインデクスを取得する;
     :rotateTetromino = tetrominoIndex + 1;
     note right
         左回転の場合は - 1
     endnote
     :tetromino = rotateTetromino;
     :画面の再描画;
+end
+
+start
+    note right
+        isPopableTetromino
+        テトロミノを取得可能か判定する
+    endnote
+    :次のテトロミノを取得する
+    (popではなくget);
+    if (ゲーム板の一番上の中央に配置可能である) then (true)
+        :return true;
+        end
+    endif
+    :return false;
+end
+
+start
+    note right
+        popTetromino
+        テトロミノを取得する
+    endnote
+    :テトロミノを取得する;
+    :新規テトロミノを生成し、スタックにpushする;
 end
 
 @enduml
