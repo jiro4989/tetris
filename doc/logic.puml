@@ -1,0 +1,15 @@
+@startuml
+
+title アプリ全体のロジック
+
+:mainプロセスの起動;
+:termboxの初期化;
+:画面定期描画のタイマーを非同期で起動
+(clock.puml);
+:キー入力待ちの開始;
+repeat
+    :キーイベントを送信する
+    (keyevent.puml);
+repeat while (true)
+
+@enduml

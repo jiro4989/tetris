@@ -1,0 +1,30 @@
+@startuml
+
+title キーイベント処理するロジック
+
+start
+    :mainプロセスからの関数呼び出し;
+    note right
+        直接画面を操作するのではなく
+        ここではclockが参照しているデータの更新のみを行う。
+        イベントを受け取って、データを変更したら再描画を実行する。
+    endnote
+    if (key == h) then (true)
+        :テトリミノが左に１つ移動;
+    elseif (key == j) then (true)
+        :テトリミノが下に１つ移動;
+    elseif (key == l) then (true)
+        :テトリミノが右に１つ移動;
+    elseif (key == r) then (true)
+        :テトリミノが右回転;
+    elseif (key == e) then (true)
+        :テトリミノが左回転;
+    elseif (key == q or key == esc) then (true)
+        end
+    else
+        :何もしない;
+    endif
+    :画面再描画;
+end
+
+@enduml

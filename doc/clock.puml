@@ -1,0 +1,18 @@
+@startuml
+
+title 定期的に画面を再描画するタイマーの処理ロジック
+
+start
+
+:mainプロセスからの非同期起動;
+repeat
+    :ゲームの状態を取得;
+    :画面の初期化;
+    :画面の描画;
+    :sleep N;
+    note right
+        Nはグローバル定数
+    endnote
+repeat while (true)
+
+@enduml
