@@ -145,7 +145,7 @@ type Mino struct {
 	Y           int
 }
 
-type MinoBlock [][]rune
+type Block [][]rune
 
 func (m *Mino) RotateRight() {
 	m.rotateRight(minos)
@@ -177,11 +177,11 @@ func (m *Mino) rotateLeft(ms [][][][]rune) {
 	m.rotateIndex = ri
 }
 
-func (m *Mino) Block() MinoBlock {
+func (m *Mino) Block() Block {
 	return m.block(minos)
 }
 
-func (m *Mino) block(ms [][][][]rune) MinoBlock {
+func (m *Mino) block(ms [][][][]rune) Block {
 	return ms[m.index][m.rotateIndex]
 }
 
