@@ -14,5 +14,7 @@ func main() {
 	termbox.SetInputMode(termbox.InputEsc)
 	termbox.Flush()
 
+	drawBackground()
+
 	waitKeyInput()
 }
