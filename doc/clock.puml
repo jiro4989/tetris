@@ -1,6 +1,6 @@
 @startuml
 
-title 定期的に画面を再描画するタイマーの処理ロジック
+title timer_redraw_logic
 
 start
 

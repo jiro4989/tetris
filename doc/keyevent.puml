@@ -1,6 +1,6 @@
 @startuml
 
-title キーイベント処理するロジック
+title keyevent
 
 start
     :mainプロセスからの関数呼び出し;

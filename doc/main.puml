@@ -1,6 +1,6 @@
 @startuml
 
-title アプリ全体のロジック
+title main_func_logic
 
 :mainプロセスの起動;
 :termboxの初期化;
