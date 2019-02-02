@@ -1,0 +1,46 @@
+@startuml
+
+title tetris
+
+start
+    note right
+        moveTetromino
+        ※同様に、右の場合、下の場合も同じようなロジック
+    endnote
+    :引数を受け取る;
+    if (左に移動可能である) then (true)
+        :テトリミノを左に1マス移動する;
+    endif
+end
+
+start
+    note right
+        deleteTetrominos
+        テトリミノが1行満たされることで、
+        削除可能かを判定する。
+    endnote
+    repeat
+        if (recordがすべてテトリミノである) then (true)
+            :recordのテトリミノを空にする;
+            :すべてのテトリミノを下にずらす;
+        endif
+    repeat while (record : records)
+end
+
+start
+    note right
+        rotateTetorimino
+        テトリミノを回転する。
+        テトリミノは配列で保持していて、回転する場合は
+        その配列インデクスを+1または-1することで実現する。
+    endnote
+    :テトリミノのインデクスを取得する;
+    :rotateTetromino = tetrominoIndex + 1;
+    note right
+        左回転の場合は - 1
+    endnote
+    :tetromino = rotateTetromino;
+    :画面の再描画;
+end
+
+@enduml
