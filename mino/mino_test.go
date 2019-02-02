@@ -78,7 +78,7 @@ func TestRotateLeft(t *testing.T) {
 }
 func TestBlock(t *testing.T) {
 	m := &Mino{}
-	assert.Equal(t, [][]rune{
+	assert.Equal(t, MinoBlock{
 		{'.', '.', '.', '.'},
 		{'.', 'G', 'G', '.'},
 		{'G', 'G', '.', '.'},
@@ -86,7 +86,7 @@ func TestBlock(t *testing.T) {
 	}, m.block(ms))
 
 	m = &Mino{index: 1, rotateIndex: 1}
-	assert.Equal(t, [][]rune{
+	assert.Equal(t, MinoBlock{
 		{'.', '.', '.', 'R'},
 		{'.', '.', 'R', 'R'},
 		{'.', '.', 'R', '.'},
