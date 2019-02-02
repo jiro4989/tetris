@@ -66,4 +66,13 @@ start
     :新規テトロミノを生成し、スタックにpushする;
 end
 
+start
+    note right
+        checkGameOver
+    endnote
+    if (isPoppableTetromino() == false) then (true)
+        :gameover;
+    endif
+end
+
 @enduml
