@@ -19,6 +19,9 @@ help: ## ドキュメントのヘルプを表示する。
 build: $(SRCS) ## ビルド
 	go build $(LDFLAGS) -o bin/$(APPNAME) .
 
+run: build ## ビルドと実行
+	./bin/$(APPNAME)
+
 install: build ## インストール
 	go install
 
