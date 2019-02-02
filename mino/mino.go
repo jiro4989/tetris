@@ -1,4 +1,4 @@
-package main
+package mino
 
 import (
 	"math/rand"
@@ -193,4 +193,17 @@ func (m *Mino) Block() Block {
 
 func (m *Mino) block(ms [][][][]rune) Block {
 	return ms[m.index][m.rotateIndex]
+}
+
+func (m *Mino) bottom(ms [][][][]rune) int {
+	block := ms[m.index][m.rotateIndex]
+	for i := len(block) - 1; 0 <= i; i-- {
+		line := block[i]
+		for _, c := range line {
+			if c != '.' {
+				return i + 1
+			}
+		}
+	}
+	return 0
 }

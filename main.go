@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/jiro4989/tetris/mino"
 	termbox "github.com/nsf/termbox-go"
 )
 
@@ -17,4 +18,23 @@ func main() {
 	drawBackground()
 
 	waitKeyInput()
+}
+
+var board = [][]rune{
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+	{'.', '.', '.', '.', '.', '.', '.'},
+}
+
+type Board [][]rune
+
+func canDownMino(m mino.Mino, b Board) bool {
+	// boardの一番下に到達したら降下不可
+	// ミノの下にすでにミノが存在したら不可
+	return true
 }

@@ -1,4 +1,4 @@
-package main
+package mino
 
 import (
 	"testing"
@@ -47,6 +47,11 @@ var (
 	}
 )
 
+func TestNewMino(t *testing.T) {
+	assert.Equal(t, &Mino{index: 0}, newMino(0))
+	assert.Equal(t, &Mino{index: 1}, newMino(1))
+}
+
 func TestRotateRight(t *testing.T) {
 	m := &Mino{}
 
@@ -76,6 +81,7 @@ func TestRotateLeft(t *testing.T) {
 	m.rotateLeft(ms)
 	assert.Equal(t, &Mino{index: 2, rotateIndex: 0}, m, "回転対象がない場合のインデックスは変化しない")
 }
+
 func TestBlock(t *testing.T) {
 	m := &Mino{}
 	assert.Equal(t, Block{
@@ -92,10 +98,45 @@ func TestBlock(t *testing.T) {
 		{'.', '.', 'R', '.'},
 		{'.', '.', '.', '.'},
 	}, m.block(ms))
-
 }
 
-func TestNewMino(t *testing.T) {
-	assert.Equal(t, &Mino{index: 0}, newMino(0))
-	assert.Equal(t, &Mino{index: 1}, newMino(1))
+func TestBottom(t *testing.T) {
+	m := &Mino{}
+	assert.Equal(t, 3, m.bottom(ms), "正常系")
+
+	ms2 := [][][][]rune{
+		{
+			{
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+				{'G', 'G', 'G', 'G'},
+			},
+		},
+	}
+	assert.Equal(t, 5, m.bottom(ms2), "一番下を取得できる")
+
+	ms2 = [][][][]rune{
+		{
+			{
+				{'G', 'G', 'G', 'G'},
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+			},
+		},
+	}
+	assert.Equal(t, 1, m.bottom(ms2), "一番上を取得できる")
+
+	ms2 = [][][][]rune{
+		{
+			{
+				{'.', '.', '.', '.'},
+				{'.', '.', '.', '.'},
+			},
+		},
+	}
+	assert.Equal(t, 0, m.bottom(ms2), "空のときは0")
+
 }
