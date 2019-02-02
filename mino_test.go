@@ -51,30 +51,30 @@ func TestRotateRight(t *testing.T) {
 	m := &Mino{}
 
 	m.rotateRight(ms)
-	assert.Equal(t, &Mino{rotateIndex: 1}, m)
+	assert.Equal(t, &Mino{rotateIndex: 1}, m, "通常の右回転")
 
 	m.rotateRight(ms)
-	assert.Equal(t, &Mino{rotateIndex: 0}, m)
+	assert.Equal(t, &Mino{rotateIndex: 0}, m, "右回転で先頭のインデックスに戻る")
 
 	m = &Mino{index: 2}
 
 	m.rotateRight(ms)
-	assert.Equal(t, &Mino{index: 2, rotateIndex: 0}, m)
+	assert.Equal(t, &Mino{index: 2, rotateIndex: 0}, m, "回転対象がない場合のインデックスは変化しない")
 }
 
 func TestRotateLeft(t *testing.T) {
 	m := &Mino{rotateIndex: 1}
 
 	m.rotateLeft(ms)
-	assert.Equal(t, &Mino{rotateIndex: 0}, m)
+	assert.Equal(t, &Mino{rotateIndex: 0}, m, "通常の左回転")
 
 	m.rotateLeft(ms)
-	assert.Equal(t, &Mino{rotateIndex: 1}, m)
+	assert.Equal(t, &Mino{rotateIndex: 1}, m, "左回転で末尾のインデックスに戻る")
 
 	m = &Mino{index: 2}
 
 	m.rotateLeft(ms)
-	assert.Equal(t, &Mino{index: 2, rotateIndex: 0}, m)
+	assert.Equal(t, &Mino{index: 2, rotateIndex: 0}, m, "回転対象がない場合のインデックスは変化しない")
 }
 func TestBlock(t *testing.T) {
 	m := &Mino{}
