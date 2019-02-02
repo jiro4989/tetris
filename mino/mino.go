@@ -195,6 +195,10 @@ func (m *Mino) block(ms [][][][]rune) Block {
 	return ms[m.index][m.rotateIndex]
 }
 
+func (m *Mino) Bottom() int {
+	return m.bottom(minos)
+}
+
 func (m *Mino) bottom(ms [][][][]rune) int {
 	block := ms[m.index][m.rotateIndex]
 	for i := len(block) - 1; 0 <= i; i-- {
