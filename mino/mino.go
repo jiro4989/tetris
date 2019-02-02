@@ -138,6 +138,8 @@ var (
 	}
 )
 
+type Block [][]rune
+
 type Mino struct {
 	index       int
 	rotateIndex int
@@ -145,7 +147,15 @@ type Mino struct {
 	Y           int
 }
 
-type Block [][]rune
+func NewMino() *Mino {
+	rand.Seed(time.Now().UnixNano())
+	n := rand.Intn(len(minos))
+	return newMino(n)
+}
+
+func newMino(n int) *Mino {
+	return &Mino{index: n}
+}
 
 func (m *Mino) RotateRight() {
 	m.rotateRight(minos)
@@ -183,14 +193,4 @@ func (m *Mino) Block() Block {
 
 func (m *Mino) block(ms [][][][]rune) Block {
 	return ms[m.index][m.rotateIndex]
-}
-
-func NewMino() *Mino {
-	rand.Seed(time.Now().UnixNano())
-	n := rand.Intn(len(minos))
-	return newMino(n)
-}
-
-func newMino(n int) *Mino {
-	return &Mino{index: n}
 }
