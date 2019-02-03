@@ -10,5 +10,5 @@ func (b Board) Top() int {
 			}
 		}
 	}
-	return 0
+	return len(b) + 1
 }

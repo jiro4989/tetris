@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/jiro4989/tetris/board"
 	"github.com/jiro4989/tetris/mino"
 	termbox "github.com/nsf/termbox-go"
@@ -23,14 +21,18 @@ func main() {
 	waitKeyInput()
 }
 
-func canDownMino(m mino.Mino, b board.Board) bool {
-	// boardの一番下に到達したら降下不可
-	w, h := len(b[0]), len(b)
-	fmt.Println(w)
-	btm := m.Bottom()
-	if h <= m.Y+btm {
-		return false
-	}
-	// ミノの下にすでにミノが存在したら不可
+func canDownMino(m *mino.Mino, b board.Board) bool {
+	// // boardの一番下に到達したら降下不可
+	// h := len(b)
+	// btm := m.Bottom()
+	// pos := m.Y + btm
+	// if h <= pos {
+	// 	return false
+	// }
+
+	// // ミノの下にすでにミノが存在したら不可
+	// if b.Top() <= pos+1 {
+	// 	return false
+	// }
 	return true
 }

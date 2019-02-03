@@ -102,7 +102,7 @@ func TestBlock(t *testing.T) {
 
 func TestBottom(t *testing.T) {
 	m := &Mino{}
-	assert.Equal(t, 3, m.bottom(ms), "正常系")
+	assert.Equal(t, []int{3, 3, 2, 0}, m.bottom(ms), "正常系")
 
 	ms2 := [][][][]rune{
 		{
@@ -115,7 +115,7 @@ func TestBottom(t *testing.T) {
 			},
 		},
 	}
-	assert.Equal(t, 5, m.bottom(ms2), "一番下を取得できる")
+	assert.Equal(t, []int{5, 5, 5, 5}, m.bottom(ms2), "一番下を取得できる")
 
 	ms2 = [][][][]rune{
 		{
@@ -127,7 +127,7 @@ func TestBottom(t *testing.T) {
 			},
 		},
 	}
-	assert.Equal(t, 1, m.bottom(ms2), "一番上を取得できる")
+	assert.Equal(t, []int{1, 1, 1, 1}, m.bottom(ms2), "一番上を取得できる")
 
 	ms2 = [][][][]rune{
 		{
@@ -137,6 +137,6 @@ func TestBottom(t *testing.T) {
 			},
 		},
 	}
-	assert.Equal(t, 0, m.bottom(ms2), "空のときは0")
+	assert.Equal(t, []int{0, 0, 0, 0}, m.bottom(ms2), "空のときは0")
 
 }

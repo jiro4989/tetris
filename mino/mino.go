@@ -140,11 +140,20 @@ var (
 
 type Block [][]rune
 
+// Mino はテトロミノ
+// 以下のようなテトロミノの例では、X=0, Y=0である。
+// .............
+// .AA..........
+// .AA..........
+// .............
+// .............
 type Mino struct {
 	index       int
 	rotateIndex int
-	X           int
-	Y           int
+	// X はboardにおけるx座標
+	X int
+	// Y はboardにおけるy座標
+	Y int
 }
 
 func NewMino() *Mino {
@@ -195,19 +204,31 @@ func (m *Mino) block(ms [][][][]rune) Block {
 	return ms[m.index][m.rotateIndex]
 }
 
-func (m *Mino) Bottom() int {
+func (m *Mino) Bottom() []int {
 	return m.bottom(minos)
 }
 
-func (m *Mino) bottom(ms [][][][]rune) int {
+// 列単位でブロックを一番下から判定し、
+// 最初に空でないブロックが見つかったインデックスを
+// 配列に追加していく
+func (m *Mino) bottom(ms [][][][]rune) []int {
 	block := ms[m.index][m.rotateIndex]
-	for i := len(block) - 1; 0 <= i; i-- {
-		line := block[i]
-		for _, c := range line {
+	rowMax := len(block)
+	colMax := len(block[0])
+	var bis []int
+	for x := 0; x < colMax; x++ {
+		var found bool
+		for y := rowMax - 1; 0 <= y; y-- {
+			c := block[y][x]
 			if c != '.' {
-				return i + 1
+				bis = append(bis, y+1)
+				found = true
+				break
 			}
 		}
+		if !found {
+			bis = append(bis, 0)
+		}
 	}
-	return 0
+	return bis
 }
