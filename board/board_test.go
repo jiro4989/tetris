@@ -7,8 +7,16 @@ import (
 )
 
 func TestNewMino(t *testing.T) {
-	assert.Equal(t, 1, Board{{'A'}, {'.'}, {'.'}, {'.'}}.Top())
-	assert.Equal(t, 3, Board{{'.'}, {'.'}, {'A'}, {'.'}}.Top())
-	assert.Equal(t, 4, Board{{'.'}, {'.'}, {'.'}, {'A'}}.Top())
-	assert.Equal(t, 5, Board{{'.'}, {'.'}, {'.'}, {'.'}}.Top())
+	assert.Equal(t, []int{4, 3, 2, 1}, Board{
+		{'.', '.', '.', 'A'},
+		{'.', '.', 'A', 'A'},
+		{'.', 'A', 'A', '.'},
+		{'A', 'A', 'A', '.'}}.Top())
+
+	assert.Equal(t, []int{1, 3, 2, 5}, Board{
+		{'A', '.', '.', '.'},
+		{'.', '.', 'A', '.'},
+		{'.', 'A', 'A', '.'},
+		{'A', 'A', 'A', '.'}}.Top())
+
 }
