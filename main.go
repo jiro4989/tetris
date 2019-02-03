@@ -22,17 +22,26 @@ func main() {
 }
 
 func canDownMino(m *mino.Mino, b board.Board) bool {
-	// // boardの一番下に到達したら降下不可
-	// h := len(b)
-	// btm := m.Bottom()
-	// pos := m.Y + btm
-	// if h <= pos {
-	// 	return false
-	// }
+	// boardの一番下に到達したら降下不可
+	h := len(b)
+	minoBottoms := m.Bottom()
+	for _, btm := range minoBottoms {
+		pos := m.Y + btm
+		if h <= pos {
+			return false
+		}
+	}
 
-	// // ミノの下にすでにミノが存在したら不可
-	// if b.Top() <= pos+1 {
-	// 	return false
-	// }
+	// ミノの下にすでにミノが存在したら不可
+	tops := b.Top()
+	for x, btm := range minoBottoms {
+		if btm == 0 {
+			continue
+		}
+		top := tops[x+m.X]
+		if top-1 <= btm {
+			return false
+		}
+	}
 	return true
 }

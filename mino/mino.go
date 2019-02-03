@@ -148,8 +148,8 @@ type Block [][]rune
 // .............
 // .............
 type Mino struct {
-	index       int
-	rotateIndex int
+	Index       int
+	RotateIndex int
 	// X はboardにおけるx座標
 	X int
 	// Y はboardにおけるy座標
@@ -163,7 +163,7 @@ func NewMino() *Mino {
 }
 
 func newMino(n int) *Mino {
-	return &Mino{index: n}
+	return &Mino{Index: n}
 }
 
 func (m *Mino) RotateRight() {
@@ -171,14 +171,14 @@ func (m *Mino) RotateRight() {
 }
 
 func (m *Mino) rotateRight(ms [][][][]rune) {
-	mb := ms[m.index]
+	mb := ms[m.Index]
 	max := len(mb)
-	ri := m.rotateIndex + 1
+	ri := m.RotateIndex + 1
 	if ri < max {
-		m.rotateIndex = ri
+		m.RotateIndex = ri
 		return
 	}
-	m.rotateIndex = 0
+	m.RotateIndex = 0
 }
 
 func (m *Mino) RotateLeft() {
@@ -186,14 +186,14 @@ func (m *Mino) RotateLeft() {
 }
 
 func (m *Mino) rotateLeft(ms [][][][]rune) {
-	mb := ms[m.index]
+	mb := ms[m.Index]
 	max := len(mb)
-	ri := m.rotateIndex - 1
+	ri := m.RotateIndex - 1
 	if ri < 0 {
-		m.rotateIndex = max - 1
+		m.RotateIndex = max - 1
 		return
 	}
-	m.rotateIndex = ri
+	m.RotateIndex = ri
 }
 
 func (m *Mino) Block() Block {
@@ -201,7 +201,7 @@ func (m *Mino) Block() Block {
 }
 
 func (m *Mino) block(ms [][][][]rune) Block {
-	return ms[m.index][m.rotateIndex]
+	return ms[m.Index][m.RotateIndex]
 }
 
 func (m *Mino) Bottom() []int {
@@ -212,7 +212,7 @@ func (m *Mino) Bottom() []int {
 // 最初に空でないブロックが見つかったインデックスを
 // 配列に追加していく
 func (m *Mino) bottom(ms [][][][]rune) []int {
-	block := ms[m.index][m.rotateIndex]
+	block := ms[m.Index][m.RotateIndex]
 	rowMax := len(block)
 	colMax := len(block[0])
 	var bis []int
