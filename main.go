@@ -6,6 +6,7 @@ import (
 
 	"github.com/jiro4989/tetris/board"
 	"github.com/jiro4989/tetris/mino"
+	"github.com/jiro4989/tetris/util"
 )
 
 func main() {
@@ -33,11 +34,11 @@ func main() {
 		{'.', '.', '.', '.', '.', '.', '.'},
 		{'.', '.', '.', '.', '.', '.', '.'},
 	}
-	currentBoard := copyMatrix(bufBoard)
+	currentBoard := util.CopyMatrix(bufBoard)
 
 	m := mino.NewMino()
 	for {
-		bufBoard = copyMatrix(currentBoard)
+		bufBoard = util.CopyMatrix(currentBoard)
 		blk := m.Block()
 		for y, line := range blk {
 			for x, c := range line {
@@ -61,15 +62,6 @@ func main() {
 	}
 
 	waitKeyInput()
-}
-
-func copyMatrix(src [][]rune) (dst [][]rune) {
-	for _, line := range src {
-		tmp := make([]rune, len(line))
-		copy(tmp, line)
-		dst = append(dst, tmp)
-	}
-	return
 }
 
 func canDownMino(m *mino.Mino, b board.Board) bool {
