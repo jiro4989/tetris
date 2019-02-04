@@ -33,22 +33,25 @@ func main() {
 		{'.', '.', '.', '.', '.', '.', '.'},
 		{'.', '.', '.', '.', '.', '.', '.'},
 	}
+	currentBoard := copyMatrix(bufBoard)
 
 	m := mino.NewMino()
 	for {
-		if canDownMino(m, bufBoard) {
+		bufBoard = copyMatrix(currentBoard)
+		blk := m.Block()
+		for y, line := range blk {
+			for x, c := range line {
+				if c != '.' {
+					bufBoard[y+m.Y][x] = c
+				}
+			}
+		}
+		if canDownMino(m, currentBoard) {
 			fmt.Println("can")
 			m.Y++
 		} else {
 			fmt.Println("not")
-			blk := m.Block()
-			for y, line := range blk {
-				for x, c := range line {
-					if c != '.' {
-						bufBoard[y+m.Y][x] = c
-					}
-				}
-			}
+			currentBoard = bufBoard
 		}
 		for _, line := range bufBoard {
 			fmt.Println(string(line))
@@ -57,6 +60,15 @@ func main() {
 	}
 
 	waitKeyInput()
+}
+
+func copyMatrix(src [][]rune) (dst [][]rune) {
+	for _, line := range src {
+		tmp := make([]rune, len(line))
+		copy(tmp, line)
+		dst = append(dst, tmp)
+	}
+	return
 }
 
 func canDownMino(m *mino.Mino, b board.Board) bool {
