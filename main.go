@@ -52,6 +52,7 @@ func main() {
 		} else {
 			fmt.Println("not")
 			currentBoard = bufBoard
+			m = mino.NewMino()
 		}
 		for _, line := range bufBoard {
 			fmt.Println(string(line))
@@ -89,7 +90,7 @@ func canDownMino(m *mino.Mino, b board.Board) bool {
 			continue
 		}
 		top := tops[x+m.X]
-		if top-1 <= btm {
+		if top-1 <= btm+m.Y {
 			return false
 		}
 	}
