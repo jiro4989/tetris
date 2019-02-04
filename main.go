@@ -1,22 +1,60 @@
 package main
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/jiro4989/tetris/board"
 	"github.com/jiro4989/tetris/mino"
-	termbox "github.com/nsf/termbox-go"
 )
 
 func main() {
-	// termboxの初期化
-	if err := termbox.Init(); err != nil {
-		panic(err)
+	// // termboxの初期化
+	// if err := termbox.Init(); err != nil {
+	// 	panic(err)
+	// }
+	// defer termbox.Close()
+
+	// termbox.SetInputMode(termbox.InputEsc)
+	// termbox.Flush()
+
+	// drawBackground()
+
+	bufBoard := board.Board{
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
+		{'.', '.', '.', '.', '.', '.', '.'},
 	}
-	defer termbox.Close()
 
-	termbox.SetInputMode(termbox.InputEsc)
-	termbox.Flush()
-
-	drawBackground()
+	m := mino.NewMino()
+	for {
+		if canDownMino(m, bufBoard) {
+			fmt.Println("can")
+			m.Y++
+		} else {
+			fmt.Println("not")
+			blk := m.Block()
+			for y, line := range blk {
+				for x, c := range line {
+					if c != '.' {
+						bufBoard[y+m.Y][x] = c
+					}
+				}
+			}
+		}
+		for _, line := range bufBoard {
+			fmt.Println(string(line))
+		}
+		time.Sleep(1 * time.Second)
+	}
 
 	waitKeyInput()
 }
