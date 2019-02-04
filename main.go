@@ -37,13 +37,14 @@ func main() {
 	currentBoard := util.CopyMatrix(bufBoard)
 
 	m := mino.NewMino()
+	m.X++
 	for {
 		bufBoard = util.CopyMatrix(currentBoard)
 		blk := m.Block()
 		for y, line := range blk {
 			for x, c := range line {
 				if c != '.' {
-					bufBoard[y+m.Y][x] = c
+					bufBoard[y+m.Y][x+m.X] = c
 				}
 			}
 		}
