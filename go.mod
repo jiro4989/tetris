@@ -26,7 +26,7 @@ require (
 	github.com/mitchellh/colorstring v0.0.0-20150917214807-8631ce90f286 // indirect
 	github.com/mitchellh/gox v0.4.0 // indirect
 	github.com/mitchellh/iochan v1.0.0 // indirect
-	github.com/motemen/gobump v0.0.0-20170609005736-b5563e1d8b75 // indirect
+	github.com/motemen/gobump v0.0.0-20190215161939-66ee926e4810 // indirect
 	github.com/nsf/termbox-go v0.0.0-20190121233118-02980233997d
 	github.com/opennota/check v0.0.0-20180911053232-0c771f5545ff // indirect
 	github.com/pkg/errors v0.8.0 // indirect

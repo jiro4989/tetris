@@ -60,6 +60,8 @@ github.com/mitchellh/iochan v1.0.0 h1:C+X3KsSTLFVBr/tK1eYN/vs4rJcvsiLU338UhYPJWe
 github.com/mitchellh/iochan v1.0.0/go.mod h1:JwYml1nuB7xOzsp52dPpHFffvOCDupsG0QubkSMEySY=
 github.com/motemen/gobump v0.0.0-20170609005736-b5563e1d8b75 h1:u86Q2ngUdcfDmyFxHoQXMVdxpsOZpLJCjZ7b5izUrEQ=
 github.com/motemen/gobump v0.0.0-20170609005736-b5563e1d8b75/go.mod h1:bJBHskFfPJ5RT+ERdz949lt6jPVTKl2v3KjIbbeQx/A=
+github.com/motemen/gobump v0.0.0-20190215161939-66ee926e4810 h1:Xzhs9ej1WbwUNIln2UKVVJo9TonFyMbeQM/OHsAwWe8=
+github.com/motemen/gobump v0.0.0-20190215161939-66ee926e4810/go.mod h1:bJBHskFfPJ5RT+ERdz949lt6jPVTKl2v3KjIbbeQx/A=
 github.com/mozilla/tls-observatory v0.0.0-20180409132520-8791a200eb40/go.mod h1:SrKMQvPiws7F7iqYp8/TX+IhxCYhzr6N/1yb8cwHsGk=
 github.com/nbutton23/zxcvbn-go v0.0.0-20160627004424-a22cb81b2ecd h1:hEzcdYzgmGA1zDrSYdh+OE4H43RrglXdZQ5ip/+93GU=
 github.com/nbutton23/zxcvbn-go v0.0.0-20160627004424-a22cb81b2ecd/go.mod h1:o96djdrsSGy3AWPyBgZMAGfxZNfgntdJG+11KU4QvbU=
