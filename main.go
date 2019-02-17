@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
+	"os"
 	"time"
 
 	termbox "github.com/nsf/termbox-go"
@@ -40,7 +40,8 @@ func clock() {
 			currentBoard.deleteRows()
 			currentMino = newMino()
 			if !currentMino.canMoveDown(currentBoard) {
-				fmt.Println("game over")
+				const dc = termbox.ColorDefault
+				os.Exit(0)
 			}
 		} else {
 			currentMino.moveDown()
