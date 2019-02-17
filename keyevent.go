@@ -13,10 +13,10 @@ func waitKeyInput() {
 				return
 			case termbox.KeySpace:
 				for {
-					currentMino.moveDown()
 					if !currentMino.canMoveDown(currentBoard) {
 						break
 					}
+					currentMino.moveDown()
 				}
 			}
 			switch ev.Ch {
