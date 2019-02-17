@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -21,9 +22,9 @@ type (
 )
 
 const (
-	minoBlockWidth = 4
-	emptyMino      = iota
+	emptyMino = iota
 	wallMino
+	minoBlockWidth = 4
 )
 
 var (
@@ -185,8 +186,8 @@ var (
 			},
 		},
 	}
-	currentBoard = initialBoard
-	displayBoard = initialBoard
+	currentBoard = CopyMatrix(initialBoard)
+	displayBoard = CopyMatrix(initialBoard)
 )
 
 func newMino() Mino {
@@ -254,19 +255,19 @@ func (m Mino) canMoveDown(b Board) bool {
 	return !m.getBlock().isOverlap(blk)
 }
 
-func (m Mino) moveRight() {
+func (m *Mino) moveRight() {
 	m.x++
 }
 
-func (m Mino) moveLeft() {
+func (m *Mino) moveLeft() {
 	m.x--
 }
 
-func (m Mino) moveDown() {
+func (m *Mino) moveDown() {
 	m.y++
 }
 
-func (m Mino) rotateRight() {
+func (m *Mino) rotateRight() {
 	ri := m.rotateIndex + 1
 	m.rotateIndex = ri
 	if len(minos[m.minoIndex]) <= ri {
@@ -274,7 +275,7 @@ func (m Mino) rotateRight() {
 	}
 }
 
-func (m Mino) rotateLeft() {
+func (m *Mino) rotateLeft() {
 	ri := m.rotateIndex - 1
 	m.rotateIndex = ri
 	if ri < 0 {
@@ -296,12 +297,12 @@ func (mb MinoBoard) fetchRow(n int) Row {
 	return row[mb.offset : len(row)-1-mb.offset]
 }
 
-func (b Board) setMino(m Mino) {
+func (b *Board) setMino(m Mino) {
 	blk := m.getBlock()
 	for y, row := range blk {
 		for x, cell := range row {
 			if cell != emptyMino {
-				b[y+m.y][x+m.x] = cell
+				(*b)[y+m.y][x+m.x] = cell
 			}
 		}
 	}
@@ -315,4 +316,14 @@ func updateDisplayBoard(m Mino) {
 func updateCurrentBoard(m Mino) {
 	currentBoard.setMino(m)
 	displayBoard = CopyMatrix(currentBoard)
+}
+
+func (b Board) show() {
+	for _, row := range b {
+		var line string
+		for _, c := range row {
+			line += fmt.Sprintf("%d", c)
+		}
+		fmt.Println(line)
+	}
 }
