@@ -37,6 +37,7 @@ func clock() {
 	for {
 		if !currentMino.canMoveDown(currentBoard) {
 			updateCurrentBoard(currentMino)
+			currentBoard.deleteRows()
 			currentMino = newMino()
 			if !currentMino.canMoveDown(currentBoard) {
 				fmt.Println("game over")

@@ -7,7 +7,14 @@ import (
 var (
 	colorMapping = map[int]termbox.Attribute{
 		0: termbox.ColorWhite,
-		1: termbox.ColorGreen,
+		1: termbox.ColorGreen | termbox.AttrBold,
+		2: termbox.ColorRed | termbox.AttrBold,
+		3: termbox.ColorCyan | termbox.AttrBold,
+		4: termbox.ColorBlue | termbox.AttrBold,
+		5: termbox.ColorYellow | termbox.AttrBold,
+		6: termbox.ColorMagenta | termbox.AttrBold,
+		7: termbox.ColorMagenta | termbox.AttrBold,
+		8: termbox.ColorMagenta | termbox.AttrBold,
 	}
 )
 
