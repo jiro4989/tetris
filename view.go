@@ -1,64 +1,42 @@
 package main
 
 import (
-	"strings"
-
 	termbox "github.com/nsf/termbox-go"
 )
 
-const (
-	background = `
-		wwwwwwwwwwww
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wkkkkkkkkkkw
-		wwwwwwwwwwww
-	`
-)
-
 var (
-	colorMapping = map[rune]termbox.Attribute{
-		'k': termbox.ColorBlack,
-		'K': termbox.ColorBlack | termbox.AttrBold,
-		'r': termbox.ColorRed,
-		'R': termbox.ColorRed | termbox.AttrBold,
-		'g': termbox.ColorGreen,
-		'G': termbox.ColorGreen | termbox.AttrBold,
-		'y': termbox.ColorYellow,
-		'Y': termbox.ColorYellow | termbox.AttrBold,
-		'b': termbox.ColorBlue,
-		'B': termbox.ColorBlue | termbox.AttrBold,
-		'm': termbox.ColorMagenta,
-		'M': termbox.ColorMagenta | termbox.AttrBold,
-		'c': termbox.ColorCyan,
-		'C': termbox.ColorCyan | termbox.AttrBold,
-		'w': termbox.ColorWhite,
-		'W': termbox.ColorWhite | termbox.AttrBold,
+	colorMapping = map[int]termbox.Attribute{
+		0: termbox.ColorWhite,
+		1: termbox.ColorGreen | termbox.AttrBold,
+		2: termbox.ColorRed | termbox.AttrBold,
+		3: termbox.ColorCyan | termbox.AttrBold,
+		4: termbox.ColorBlue | termbox.AttrBold,
+		5: termbox.ColorYellow | termbox.AttrBold,
+		6: termbox.ColorMagenta | termbox.AttrBold,
+		7: termbox.ColorMagenta | termbox.AttrBold,
+		8: termbox.ColorMagenta | termbox.AttrBold,
 	}
 )
 
 func drawBackground() {
+	updateDisplayBoard(currentMino)
+	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 	const dc = termbox.ColorDefault
-	lines := strings.Split(background, "\n")
-	for y, line := range lines {
-		line = strings.Replace(line, "\t", "", -1)
-		for x, c := range line {
-			color := colorMapping[c]
+	for y, row := range displayBoard {
+		for x, cell := range row {
+			color := colorMapping[cell]
 			termbox.SetCell(2*x-1, y, ' ', dc, color)
 			termbox.SetCell(2*x, y, ' ', dc, color)
 		}
 	}
 	termbox.Flush()
+}
+
+func CopyMatrix(src Board) (dst Board) {
+	for _, line := range src {
+		tmp := make([]int, len(line))
+		copy(tmp, line)
+		dst = append(dst, tmp)
+	}
+	return
 }

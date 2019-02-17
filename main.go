@@ -2,90 +2,50 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 
-	"github.com/jiro4989/tetris/board"
-	"github.com/jiro4989/tetris/mino"
-	"github.com/jiro4989/tetris/util"
+	termbox "github.com/nsf/termbox-go"
 )
 
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+var currentMino Mino
+
 func main() {
-	// // termboxの初期化
-	// if err := termbox.Init(); err != nil {
-	// 	panic(err)
-	// }
-	// defer termbox.Close()
-
-	// termbox.SetInputMode(termbox.InputEsc)
-	// termbox.Flush()
-
-	// drawBackground()
-
-	bufBoard := board.Board{
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
-		{'.', '.', '.', '.', '.', '.', '.'},
+	// termboxの初期化
+	if err := termbox.Init(); err != nil {
+		panic(err)
 	}
-	currentBoard := util.CopyMatrix(bufBoard)
+	defer termbox.Close()
 
-	m := mino.NewMino()
-	m.X++
-	for {
-		bufBoard = util.CopyMatrix(currentBoard)
-		blk := m.Block()
-		for y, line := range blk {
-			for x, c := range line {
-				if c != '.' {
-					bufBoard[y+m.Y][x+m.X] = c
-				}
-			}
-		}
-		if canDownMino(m, currentBoard) {
-			fmt.Println("can")
-			m.Y++
-		} else {
-			fmt.Println("not")
-			currentBoard = bufBoard
-			m = mino.NewMino()
-		}
-		for _, line := range bufBoard {
-			fmt.Println(string(line))
-		}
-		time.Sleep(1 * time.Second)
-	}
+	currentMino = newMino()
+
+	termbox.SetInputMode(termbox.InputEsc)
+	termbox.Flush()
+
+	drawBackground()
+
+	go clock()
 
 	waitKeyInput()
 }
 
-func canDownMino(m *mino.Mino, b board.Board) bool {
-	// boardの一番下に到達したら降下不可
-	h := len(b)
-	minoBottoms := m.Bottom()
-	for _, btm := range minoBottoms {
-		pos := m.Y + btm
-		if h <= pos {
-			return false
+func clock() {
+	for {
+		if !currentMino.canMoveDown(currentBoard) {
+			updateCurrentBoard(currentMino)
+			currentBoard.deleteRows()
+			currentMino = newMino()
+			if !currentMino.canMoveDown(currentBoard) {
+				fmt.Println("game over")
+			}
+		} else {
+			currentMino.moveDown()
 		}
+		drawBackground()
+		time.Sleep(1 * time.Second)
 	}
-
-	// ミノの下にすでにミノが存在したら不可
-	tops := b.Top()
-	for x, btm := range minoBottoms {
-		if btm == 0 {
-			continue
-		}
-		top := tops[x+m.X]
-		if top-1 <= btm+m.Y {
-			return false
-		}
-	}
-	return true
 }

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	termbox "github.com/nsf/termbox-go"
 )
 
@@ -18,23 +16,23 @@ func waitKeyInput() {
 			case 'q':
 				return
 			case 'h':
-				// TODO
-				fmt.Println("hello")
+				if currentMino.canMoveLeft(currentBoard) {
+					currentMino.moveLeft()
+				}
 			case 'j':
-				// TODO
-				fmt.Println("hello")
+				if currentMino.canMoveDown(currentBoard) {
+					currentMino.moveDown()
+				}
 			case 'l':
-				// TODO
-				fmt.Println("hello")
-			case 'r':
-				// TODO
-				fmt.Println("hello")
-			case 'e':
-				// TODO
-				fmt.Println("hello")
+				if currentMino.canMoveRight(currentBoard) {
+					currentMino.moveRight()
+				}
+			case 'u':
+				currentMino.rotateLeft()
+			case 'o':
+				currentMino.rotateRight()
 			}
 		}
-		// TODO
-		// redraw
+		drawBackground()
 	}
 }
