@@ -37,8 +37,6 @@ func waitKeyInput() {
 				fmt.Println("hello")
 			}
 		}
-		updateDisplayBoard(currentMino)
-		termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 		drawBackground()
 	}
 }

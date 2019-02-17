@@ -318,6 +318,8 @@ func updateCurrentBoard(m Mino) {
 	displayBoard = CopyMatrix(currentBoard)
 }
 
+// show はデバッグ用の関数なのでメインロジックにはあんまり関係ない
+// 機能としてはボードをボードっぽく表示してくれてハッピーになれる感じのアレ
 func (b Board) show() {
 	for _, row := range b {
 		var line string

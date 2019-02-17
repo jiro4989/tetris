@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -27,5 +28,23 @@ func main() {
 
 	drawBackground()
 
+	go clock()
+
 	waitKeyInput()
+}
+
+func clock() {
+	for {
+		if !currentMino.canMoveDown(currentBoard) {
+			updateCurrentBoard(currentMino)
+			currentMino = newMino()
+			if !currentMino.canMoveDown(currentBoard) {
+				fmt.Println("game over")
+			}
+		} else {
+			currentMino.moveDown()
+		}
+		drawBackground()
+		time.Sleep(1 * time.Second)
+	}
 }
