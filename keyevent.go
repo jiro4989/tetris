@@ -11,6 +11,13 @@ func waitKeyInput() {
 			switch ev.Key {
 			case termbox.KeyCtrlC, termbox.KeyCtrlD:
 				return
+			case termbox.KeySpace:
+				for {
+					currentMino.moveDown()
+					if !currentMino.canMoveDown(currentBoard) {
+						break
+					}
+				}
 			}
 			switch ev.Ch {
 			case 'q':
