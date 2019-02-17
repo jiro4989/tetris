@@ -1,16 +1,20 @@
 package main
 
+import (
+	"math/rand"
+)
+
 type (
-	Board     [][]int8
+	Board     [][]int
 	MinoBoard struct {
 		board  Board
-		offset uint8
+		offset int
 	}
-	Row   []int8
-	Block [4][4]int8
+	Row   []int
+	Block [4][4]int
 	Mino  struct {
-		rotateIndex int8
-		minoIndex   int8
+		rotateIndex int
+		minoIndex   int
 		x           int
 		y           int
 	}
@@ -23,7 +27,7 @@ const (
 )
 
 var (
-	initialBoard = [][]int{
+	initialBoard Board = Board{
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -51,7 +55,7 @@ var (
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	}
-	minos = [][][][]int{
+	minos = [][]Block{
 		{
 			{
 				{0, 0, 0, 0},
@@ -185,6 +189,16 @@ var (
 	displayBoard = initialBoard
 )
 
+func newMino() Mino {
+	n := rand.Intn(len(minos))
+	mino := Mino{
+		minoIndex: n,
+		x:         2,
+		y:         0,
+	}
+	return mino
+}
+
 func (b Board) fetchBlock(x, y int) (ret Block) {
 	var i int
 	for y2 := y; y2 < y+minoBlockWidth; y2++ {
@@ -202,7 +216,7 @@ func (b Board) fetchBlock(x, y int) (ret Block) {
 func (b Block) isOverlap(target Block) bool {
 	for y, row := range b {
 		for x, cell := range row {
-			targetCell := b[y][x]
+			targetCell := target[y][x]
 			overlap := cell + targetCell
 			if 1 < overlap {
 				return true
@@ -220,7 +234,7 @@ func (m Mino) canMoveRight(b Board) bool {
 	if len(b[0]) < m.x+1+minoBlockWidth {
 		return false
 	}
-	blk := b.fetchBlock(m.x+1, ym.y)
+	blk := b.fetchBlock(m.x+1, m.y)
 	return !m.getBlock().isOverlap(blk)
 }
 
@@ -228,7 +242,7 @@ func (m Mino) canMoveLeft(b Board) bool {
 	if m.x-1 < 0 {
 		return false
 	}
-	blk := b.fetchBlock(m.x-1, ym.y)
+	blk := b.fetchBlock(m.x-1, m.y)
 	return !m.getBlock().isOverlap(blk)
 }
 
@@ -294,11 +308,11 @@ func (b Board) setMino(m Mino) {
 }
 
 func updateDisplayBoard(m Mino) {
-	displayBoard = currentBoard
+	displayBoard = CopyMatrix(currentBoard)
 	displayBoard.setMino(m)
 }
 
 func updateCurrentBoard(m Mino) {
 	currentBoard.setMino(m)
-	displayBoard = currentBoard
+	displayBoard = CopyMatrix(currentBoard)
 }
