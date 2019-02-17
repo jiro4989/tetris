@@ -29,7 +29,20 @@ func drawBackground() {
 			termbox.SetCell(2*x, y, ' ', dc, color)
 		}
 	}
+	y := len(displayBoard) + 2
+	const blk = termbox.ColorBlack
+	const wht = termbox.ColorWhite
+	setTextToDisplay("h: move left, j: move down k: move right", 0, y, blk, wht)
+	setTextToDisplay("Space: move bottom", 0, y+1, blk, wht)
+	setTextToDisplay("q or Esc: quit game", 0, y+2, blk, wht)
 	termbox.Flush()
+}
+
+func setTextToDisplay(text string, x, y int, fg, bg termbox.Attribute) {
+	for i, c := range text {
+		termbox.SetCell(2*x+i, y, c, fg, bg)
+		termbox.SetCell(2*x+i+1, y, ' ', fg, bg)
+	}
 }
 
 func CopyMatrix(src Board) (dst Board) {
