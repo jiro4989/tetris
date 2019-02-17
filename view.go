@@ -44,12 +44,3 @@ func setTextToDisplay(text string, x, y int, fg, bg termbox.Attribute) {
 		termbox.SetCell(2*x+i+1, y, ' ', fg, bg)
 	}
 }
-
-func CopyMatrix(src Board) (dst Board) {
-	for _, line := range src {
-		tmp := make([]int, len(line))
-		copy(tmp, line)
-		dst = append(dst, tmp)
-	}
-	return
-}
