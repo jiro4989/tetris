@@ -204,7 +204,7 @@ func (b Board) fetchBlock(x, y int) (ret Block) {
 	var i int
 	for y2 := y; y2 < y+minoBlockWidth; y2++ {
 		var j int
-		for x2 := y; x2 < y+minoBlockWidth; x2++ {
+		for x2 := x; x2 < x+minoBlockWidth; x2++ {
 			cell := b[y2][x2]
 			ret[i][j] = cell
 			j++
