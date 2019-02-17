@@ -40,7 +40,6 @@ func clock() {
 			currentBoard.deleteRows()
 			currentMino = newMino()
 			if !currentMino.canMoveDown(currentBoard) {
-				const dc = termbox.ColorDefault
 				os.Exit(0)
 			}
 		} else {
