@@ -12,6 +12,7 @@ var (
 )
 
 func drawBackground() {
+	updateDisplayBoard(currentMino)
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 	const dc = termbox.ColorDefault
 	for y, row := range displayBoard {
@@ -21,7 +22,6 @@ func drawBackground() {
 			termbox.SetCell(2*x, y, ' ', dc, color)
 		}
 	}
-	updateDisplayBoard(currentMino)
 	termbox.Flush()
 }
 
